@@ -15,6 +15,16 @@ return {
 }
 
 function App() {
+  return (
+<div>
+  <Counter/>
+  <Counter/>
+  <Counter/>
+  </div>
+  )
+
+}
+function Counter(){
   const {count,increase}=useCounter();
 
   return (
