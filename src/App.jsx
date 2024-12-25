@@ -48,6 +48,7 @@ function App(){
   <button onClick={()=> setpage(1)}>page 1</button>
   <button onClick={()=> setpage(2)}>page 2</button>
   <button onClick={()=> setpage(3)}>page 3</button>
+  
     {JSON.stringify(post)}
   </div>
 )
