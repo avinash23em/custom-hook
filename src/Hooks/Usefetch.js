@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from 'react'
 
-export default function usePosttitle(){
+export default function UseFetch(url){
     const[post,setpost]=useState({});
+    const[load,setload]=useState(true);
     async function getposts(){
-    const response=await fetch("https://jsonplaceholder.typicode.com/posts/1")
+        setload(true);
+    const response=await fetch(url)
     const json=await response.json();
     setpost(json);
+    setload(false);
     }
     useEffect(()=>{
     getposts();
 
-    },[])
+    },[url])
 
-    return post.title;
+    return {
+        post,
+        load
+    }
 
 }

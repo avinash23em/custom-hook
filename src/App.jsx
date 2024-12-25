@@ -1,7 +1,7 @@
 import { act, useState } from 'react'
 
 import './App.css'
-import usePosttitle from './Hooks/Usefetch'
+import useFetch from './Hooks/Usefetch'
 // function useCounter(){
 //   const[count,setcount]=useState(0);
 //   function increase(){
@@ -34,10 +34,21 @@ import usePosttitle from './Hooks/Usefetch'
 //   )
 // }
 function App(){
-  const posttitle=usePosttitle();
+   const[page,setpage]=useState(1);
+  const{post,load}=useFetch("https://jsonplaceholder.typicode.com/posts/"+page);
+  if(load){
+    return (
+      <div>
+      loading......
+      </div>
+    )
+  }
   return (
   <div>
-    {posttitle}
+  <button onClick={()=> setpage(1)}>page 1</button>
+  <button onClick={()=> setpage(2)}>page 2</button>
+  <button onClick={()=> setpage(3)}>page 3</button>
+    {JSON.stringify(post)}
   </div>
 )
 }
