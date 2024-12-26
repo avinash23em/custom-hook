@@ -1,4 +1,4 @@
-import { act, useState } from 'react'
+import { act, useState,useRef } from 'react'
 
 import './App.css'
 import useFetch from './Hooks/Usefetch'
@@ -62,18 +62,46 @@ import { Useprev } from './Hooks/Useprev';
 
 //use prev implementation 
 
-function App(){
-  const[curr,setcurr]=useState(0);
-  const prev=Useprev(curr);
+// function App(){
+//   const[curr,setcurr]=useState(0);
+//   const prev=Useprev(curr);
   
-return(
-  <div>
-    <button onClick={()=>{
-      setcurr((curr)=>curr+1);
-    }}>click me {curr}</button>
-    <p>the previous value was {prev}</p>
-  </div>
-)
+// return(
+//   <div>
+//     <button onClick={()=>{
+//       setcurr((curr)=>curr+1);
+//     }}>click me {curr}</button>
+//     <p>the previous value was {prev}</p>
+//   </div>
+// )
+// }
+
+//useDebounce implementation
+function Usedebounce(original_fn){
+
+const curr=useRef();
+const fn=()=>{
+clearTimeout(curr.current);
+curr.current=setTimeout(original_fn,200);
+
+}
+return fn;
+
+
+}
+
+function App(){
+  function sendtoback(){
+    fetch("api.amazon.com/search")
+  }
+  const debounce=Usedebounce(sendtoback);
+
+  return (
+    <div>
+      <input type="text" onChange={debounce}></input>
+    </div>
+  )
+
 }
 
 
